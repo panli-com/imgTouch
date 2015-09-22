@@ -5,14 +5,7 @@
 /*
     图片滚动效果
   
-    @object config : {
-            @Number width : 一次滚动宽度，默认为box里面第一个一级子元素宽度[如果子元素宽度不均匀则滚动效果会错乱]
-            @Number size : 列表长度，默认为box里面所有一级子元素个数[如果size不等于一级子元素个数，则不支持循环滚动]
-            @Boolean loop : 是否支持循环滚动 默认 true
-            @Boolean auto : 是否自动滚动,支持自动滚动时必须支持循环滚动，否则设置无效,默认为true
-            @Number auto_wait_time : 自动轮播一次时间间隔,默认为：3000ms
-            @Function callback : 滚动完回调函数，参入一个参数当前滚动节点索引值
-        }
+   
 */
 function PanliScrollImg(box,config){
     this.box = $(box);
@@ -20,7 +13,7 @@ function PanliScrollImg(box,config){
     this.width = this.config.width||this.box.children().eq(0).width();//一次滚动的宽度
     this.size = this.config.size||this.box.children().length;
     this.loop = this.config.loop||true;//默认能循环滚动
-    this.auto = this.config.auto||true;//默认自动滚动
+    this.auto = this.config.auto||false;//默认自动滚动
     this.auto_wait_time = this.config.auto_wait_time||3000;//轮播间隔
     this.scroll_time = 300;//滚动时长
     this.minleft = -this.width*(this.size-1);//最小left值，注意是负数[不循环情况下的值]
@@ -41,6 +34,13 @@ $.extend(PanliScrollImg.prototype,{
         this.auto_scroll();
     },
     bind_event : function(){
+    	var boxChildL = this.box.children().length;
+
+    	if(boxChildL<2){
+    		console.log("<2");
+    		return;
+    	};
+    	
         var self = this;
         self.box.bind('touchstart',function(e){
             if(e.touches.length==1 && !self.busy){
@@ -55,12 +55,15 @@ $.extend(PanliScrollImg.prototype,{
             !self.busy && self.move_end();
         });
     },
-    /*
-        初始化循环滚动,当一次性需要滚动多个子元素时，暂不支持循环滚动效果,
-        如果想实现一次性滚动多个子元素效果，可以通过页面结构实现
-        循环滚动思路：复制首尾节点到尾首
-    */
+   
     init_loop : function(){
+    	var boxChildL = this.box.children().length;
+
+    	if(boxChildL<2){
+    		console.log("<2");
+    		return;
+    	};
+    	console.log(">1");
         if(this.box.children().length == this.size && this.loop){//暂时只支持size和子节点数相等情况的循环
             this.now_left = -this.width;//设置初始位置信息
             this.minleft = -this.width*this.size;//最小left值

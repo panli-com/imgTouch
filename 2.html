@@ -47,9 +47,12 @@ div.imgbox ul li img{width:24rem;height:16.5rem;}
 <body>
 <div class="imgbox">
     <ul>
-        <li><a href=""><img src="http://y2.ifengimg.com/df84c07b46e03f8e/2014/0512/rdn_53708f3d8533e.jpg"></img></a></li>
-        <li><a href=""><img src="http://y2.ifengimg.com/df84c07b46e03f8e/2014/0512/rdn_53708f23aad06.jpg"></img></a></li>
-        <li><a href=""><img src="http://y2.ifengimg.com/df84c07b46e03f8e/2014/0512/rdn_53708f345282b.jpg"></img></a></li>
+        <li>
+        <a href=""><img src="http://y2.ifengimg.com/df84c07b46e03f8e/2014/0512/rdn_53708f3d8533e.jpg"></img></a>
+        </li>
+         <li>
+        <a href=""><img src="http://y2.ifengimg.com/df84c07b46e03f8e/2014/0512/rdn_53708f3d8533e.jpg"></img></a>
+        </li>
     </ul>
 </div>
 <script src="http://zeptojs.com/zepto.min.js"></script>
@@ -63,8 +66,8 @@ div.imgbox ul li img{width:24rem;height:16.5rem;}
         PanliScrollImg.go(0);//会切换到第一张图片
 */
 var PanliScrollImg = $.PanliScrollImg('.imgbox ul',{
-        loop : true,//循环切换
-        auto : true //自动切换        
+        loop : false,//循环切换
+        auto : false //自动切换        
     });
 })()
 </script>
